@@ -1,28 +1,51 @@
 pipeline {
-    agent any
+   agent any
+//   options {
+//      disableConcurrentBuilds()
+//   }
+   stages {
+       stage('Build') {
+           steps {
+               lock('lock1') {
+               echo 'sleeping 30'
+               sleep(30)
+               }
+           }
+      }
 
-    stages {
-        stage('Build') {
+      stage('Lock Env') {
+      options {
+         lock('lock2') 
+      }
+      stages {
+         stage('Deploy') {
             steps {
-                lock('lock1') {
-                echo 'sleeping 30'
-                sleep(30)
-                }
+               echo 'Deploying..'
+               sleep(30)
             }
-        }
-        stage('Test') {
+          }
+
+         stage('Ftest1') {
             steps {
-                echo 'Testing..'
-                lock('lock1') {
-                    echo 'sleeping 30'
-                    sleep(30)
-                }
+               echo 'Testing F1...'
+               sleep(30)
             }
-        }
-        stage('Deploy') {
+          }
+
+         stage('Ftest2') {
             steps {
-                echo 'Deploying....'
+               echo 'Testing F2...'
+               sleep(30)
             }
-        }
-    }
+         }
+      }
+    }  // stage('Lock Env')
+
+    stage('Unlocked stage') {
+       steps {
+          echo 'Nothing locked this stage....'
+          sleep(30)
+       }
+     }
+  }
 }
