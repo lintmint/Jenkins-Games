@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                lock(lock1) {
+                lock('lock1') {
                 echo 'Building..'
                 }
             }
