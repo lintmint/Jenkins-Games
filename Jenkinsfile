@@ -5,13 +5,18 @@ pipeline {
         stage('Build') {
             steps {
                 lock('lock1') {
-                echo 'Building..'
+                echo 'sleeping 30'
+                sleep(30)
                 }
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
+                lock('lock1') {
+                    echo 'sleeping 30'
+                    sleep(30)
+                }
             }
         }
         stage('Deploy') {
