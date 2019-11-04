@@ -1,12 +1,13 @@
 pipeline {
    agent any
-//   options {
+   options {
+      timeout(time: 90, unit: 'MINUTES')
 //      disableConcurrentBuilds()
-//   }
+   }
    stages {
        stage('Build') {
            steps {
-               lock('lock1') {
+               lock('lock1') {    // locking a step, not stage
                echo 'sleeping 30'
                sleep(30)
                }
@@ -15,7 +16,8 @@ pipeline {
 
       stage('Lock Env') {
       options {
-         lock('lock2') 
+         lock('lock2') // locking entire stage
+         
       }
       stages {
          stage('Deploy') {
@@ -26,6 +28,9 @@ pipeline {
           }
 
          stage('Ftest1') {
+            options {
+               retry(2)
+            }
             steps {
                echo 'Testing F1...'
                sleep(30)
@@ -33,6 +38,9 @@ pipeline {
           }
 
          stage('Ftest2') {
+            options {
+               retry(2)
+            }
             steps {
                echo 'Testing F2...'
                sleep(30)
