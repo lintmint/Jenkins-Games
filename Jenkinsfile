@@ -7,7 +7,7 @@ pipeline {
    stages {
        stage('Build') {
            steps {
-               lock('lock1') {    // locking a step, not stage
+               lock('lock1') {    // locking step
                echo 'sleeping 30'
                sleep(30)
                }
@@ -17,7 +17,6 @@ pipeline {
       stage('Lock Env') {
       options {
          lock('lock2') // locking entire stage
-         
       }
       stages {
          stage('Deploy') {
@@ -43,7 +42,8 @@ pipeline {
             }
             steps {
                echo 'Testing F2...'
-               sleep(30)
+               sleep(5)
+               error('you fail')
             }
          }
       }
