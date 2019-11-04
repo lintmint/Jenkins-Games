@@ -43,7 +43,7 @@ pipeline {
             steps {
                echo 'Testing F2...'
                sleep(5)
-               error('you fail')
+               //error('you fail')
             }
          }
       }
