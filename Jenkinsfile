@@ -1,5 +1,8 @@
 pipeline {
    agent any
+   environment {
+      LOCK_RESOURCE = 'lock1'
+   }
    options {
       timeout(time: 90, unit: 'MINUTES')
 //      disableConcurrentBuilds()
@@ -12,7 +15,7 @@ pipeline {
       }
        stage('Build') {
            steps {
-               lock('lock1') {    // locking step
+               lock(${LOCK_RESOURCE}") {    // locking step
                echo 'sleeping 30'
                sleep(30)
                }
