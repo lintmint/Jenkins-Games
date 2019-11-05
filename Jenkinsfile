@@ -1,7 +1,9 @@
 pipeline {
    agent any
    environment {
-      LOCK_RESOURCE = 'lock1'
+      //LOCK_RESOURCE = 'lock1'
+      LOCK_RESOURCE = "${GIT_BRANCH}-1"
+      
    }
    options {
       timeout(time: 90, unit: 'MINUTES')
