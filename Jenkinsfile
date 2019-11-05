@@ -7,7 +7,7 @@ pipeline {
    stages {
       stage('Info') {
          steps {
-          shell('env')
+          sh 'env'
          }
       }
        stage('Build') {
