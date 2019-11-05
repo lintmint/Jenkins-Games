@@ -1,8 +1,9 @@
 pipeline {
    agent any
+   /*
      parameters {
-    gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
-  }
+   
+  } */
    environment {
       //LOCK_RESOURCE = 'lock1'
       LOCK_RESOURCE = "${GIT_BRANCH}-1"
