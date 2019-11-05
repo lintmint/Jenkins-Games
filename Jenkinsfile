@@ -15,7 +15,7 @@ pipeline {
       }
        stage('Build') {
            steps {
-               lock(${LOCK_RESOURCE}") {    // locking step
+               lock("${LOCK_RESOURCE}") {    // locking step
                echo 'sleeping 30'
                sleep(30)
                }
