@@ -5,6 +5,11 @@ pipeline {
 //      disableConcurrentBuilds()
    }
    stages {
+      stage('Info') {
+         steps {
+          shell('env')
+         }
+      }
        stage('Build') {
            steps {
                lock('lock1') {    // locking step
